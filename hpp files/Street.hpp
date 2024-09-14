@@ -3,7 +3,7 @@
 
 #include "Slot.hpp"
 
-class Street : public Slot {
+class Street : public Slot,  public std::enable_shared_from_this<Street> {
 public:
     std::string colorGroup;
     int rent;

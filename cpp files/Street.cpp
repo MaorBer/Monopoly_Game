@@ -28,7 +28,7 @@ void Street::action(std::shared_ptr<Player> player) {
         player->payRent(rent);
         owner->money += rent;
     } else if (owner == nullptr) {
-        std::cout << player->name << " landed on " << name << " which is unowned and can be bought for " << price << std::endl;
+        std::cout << player->name << " +landed on " << name << " which is unowned and can be bought for " << price << std::endl;
         player->buyProperty(shared_from_this());
     }
 }
