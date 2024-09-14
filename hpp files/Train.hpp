@@ -2,6 +2,7 @@
 #define TRAIN_HPP
 
 #include "Slot.hpp"
+#include <algorithm>
 
 class Train : public Slot {
 public:

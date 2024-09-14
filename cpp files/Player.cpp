@@ -1,5 +1,7 @@
-#include "Player.hpp"
-#include "Slot.hpp"
+#include "../hpp files/Player.hpp"
+#include "../hpp files/Slot.hpp"
+#include <iostream>
+#include <algorithm>
 
 Player::Player(const std::string& name, int money)
     : name(name), money(money), position(0), inJail(false), turnsInJail(0) {}

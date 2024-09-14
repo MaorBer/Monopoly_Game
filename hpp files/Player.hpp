@@ -6,7 +6,7 @@
 #include <memory>
 #include "Slot.hpp"
 
-class Player {
+class Player : public std::enable_shared_from_this<Player> {
 public:
     std::string name;
     int money;
