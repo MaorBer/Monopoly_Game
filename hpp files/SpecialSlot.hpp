@@ -6,6 +6,7 @@
 class SpecialSlot : public Slot {
 public:
     SpecialSlot(const std::string& name);
+    SpecialSlot(const std::string& name, int tax);
 
     void action(std::shared_ptr<Player> player) override;
 };
