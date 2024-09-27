@@ -14,8 +14,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+    void onRollDiceClicked();   // Slot for "Roll Dice" button
+    void onBuyPropertyClicked(); // Slot for "Buy Property" button
+    void onEndTurnClicked();    // Slot for "End Turn" button
 
 private:
     Ui::MainWindow *ui;

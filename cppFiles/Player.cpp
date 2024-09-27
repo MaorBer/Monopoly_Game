@@ -32,3 +32,55 @@ void Player::buildHouse(std::shared_ptr<Slot> street) {
 bool Player::isBankrupt() const {
     return money <= 0;
 }
+
+void Player::reduceMoney(int price) {
+    if (price > 0) {
+        this->money -= price;
+    }
+    else{
+        exit(1);
+    }
+}
+
+
+// Getters
+std::string Player::getName() const {
+    return name;
+}
+
+int Player::getMoney() const {
+    return money;
+}
+
+int Player::getPosition() const {
+    return position;
+}
+
+bool Player::getInJail() const {
+    return inJail;
+}
+
+int Player::getTurnsInJail() const {
+    return turnsInJail;
+}
+
+// Setters
+void Player::setName(const std::string& name) {
+    this->name = name;
+}
+
+void Player::setMoney(int money) {
+    this->money = money;
+}
+
+void Player::setPosition(int position) {
+    this->position = position;
+}
+
+void Player::setInJail(bool inJail) {
+    this->inJail = inJail;
+}
+
+void Player::setTurnsInJail(int turnsInJail) {
+    this->turnsInJail = turnsInJail;
+}

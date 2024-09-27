@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/Monopolyboardimg.jpg</file>
+        <file>resources/PlayerPiece.png</file>
+    </qresource>
+</RCC>

@@ -1,3 +1,4 @@
+// Player.hpp
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -22,6 +23,23 @@ public:
     void payRent(int amount);
     void buildHouse(std::shared_ptr<Slot> street);
     bool isBankrupt() const;
+    void reduceMoney(int price); 
+    void addMoney(int amount);
+    bool ownsBothUtilities() const;
+
+    // Getters
+    std::string getName() const;
+    int getMoney() const;
+    int getPosition() const;
+    bool getInJail() const;
+    int getTurnsInJail() const;
+
+    // Setters
+    void setName(const std::string& name);
+    void setMoney(int money);
+    void setPosition(int position);
+    void setInJail(bool inJail);
+    void setTurnsInJail(int turnsInJail);
 };
 
 #endif // PLAYER_HPP

@@ -16,7 +16,7 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
     slots.push_back(std::make_shared<SpecialSlot>("Community Chest"));
     slots.push_back(std::make_shared<Street>("Baltic Avenue", 60, "Brown", 4, 50, 20, 450));
     slots.push_back(std::make_shared<SpecialSlot>("Income Tax", 200)); // Fixed tax
-    slots.push_back(std::make_shared<Train>("Reading Railroad", 200));
+    slots.push_back(std::make_shared<Train>("Reading Railroad", 200, 50));
 
     // Left side of the board
     slots.push_back(std::make_shared<Street>("Oriental Avenue", 100, "Light Blue", 6, 50, 30, 550));
@@ -31,7 +31,7 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
     slots.push_back(std::make_shared<Utility>("Electric Company", 150));
     slots.push_back(std::make_shared<Street>("States Avenue", 140, "Pink", 10, 100, 50, 750));
     slots.push_back(std::make_shared<Street>("Virginia Avenue", 160, "Pink", 12, 100, 60, 900));
-    slots.push_back(std::make_shared<Train>("Pennsylvania Railroad", 200));
+    slots.push_back(std::make_shared<Train>("Pennsylvania Railroad", 200, 50));
 
     // Right side of the board
     slots.push_back(std::make_shared<Street>("St. James Place", 180, "Orange", 14, 100, 70, 950));
@@ -46,7 +46,7 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
     slots.push_back(std::make_shared<SpecialSlot>("Chance", 0));
     slots.push_back(std::make_shared<Street>("Indiana Avenue", 220, "Red", 18, 150, 90, 1050));
     slots.push_back(std::make_shared<Street>("Illinois Avenue", 240, "Red", 20, 150, 100, 1100));
-    slots.push_back(std::make_shared<Train>("B&O Railroad", 200));
+    slots.push_back(std::make_shared<Train>("B&O Railroad", 200, 50));
 
     // Left side of the board
     slots.push_back(std::make_shared<Street>("Atlantic Avenue", 260, "Yellow", 22, 150, 110, 1150));
@@ -61,7 +61,7 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
     slots.push_back(std::make_shared<Street>("North Carolina Avenue", 300, "Green", 26, 200, 130, 1275));
     slots.push_back(std::make_shared<SpecialSlot>("Community Chest", 0));
     slots.push_back(std::make_shared<Street>("Pennsylvania Avenue", 320, "Green", 28, 200, 150, 1400));
-    slots.push_back(std::make_shared<Train>("Short Line", 200));
+    slots.push_back(std::make_shared<Train>("Short Line", 200, 50));
 
     // Last stretch (leading to Go)
     slots.push_back(std::make_shared<SpecialSlot>("Chance", 0));
@@ -78,10 +78,10 @@ std::shared_ptr<Slot> GameBoard::getSlot(int index) {
     return slots[index];
 }
 
-std::shared_ptr<Slot> GameBoard::getSlot(int position)
-{
-    return slots[position % slots.size()];
-}
+// std::shared_ptr<Slot> GameBoard::getSlot(int position)
+// {
+//     return slots[position % slots.size()];
+// }
 
 void GameBoard::movePlayer(std::shared_ptr<Player> player, int steps)
 {
