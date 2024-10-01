@@ -8,11 +8,16 @@
 
 class Utility : public Slot, public std::enable_shared_from_this<Utility> {
 public:
-    std::string name;
-    int price;
-
     Utility(const std::string& name, int price);
     virtual void action(std::shared_ptr<Player> player) override;
+
+    // Getters
+    const std::string& getName() const { return name; }
+    int getPrice() const { return price; }
+
+private:
+    std::string name;
+    int price;
 };
 
 #endif // UTILITY_HPP

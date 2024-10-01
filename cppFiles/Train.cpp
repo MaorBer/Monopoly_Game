@@ -1,5 +1,5 @@
-#include "../hpp files/Train.hpp"
-#include "../hpp files/Player.hpp"
+#include "../hppFiles/Train.hpp"
+#include "../hppFiles/Player.hpp"
 
 Train::Train(const std::string& name, int price, int baseRent)
     : Slot(name, price), baseRent(baseRent) {}

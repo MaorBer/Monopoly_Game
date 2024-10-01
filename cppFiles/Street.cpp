@@ -1,5 +1,5 @@
-#include "../hpp files/Street.hpp"
-#include "../hpp files/Player.hpp"
+#include "../hppFiles/Street.hpp"
+#include "../hppFiles/Player.hpp"
 
 Street::Street(const std::string& name, int price, const std::string& colorGroup, int rent, int housePrice, int rentWithHouse, int rentWithHotel)
     : Slot(name, price), colorGroup(colorGroup), rent(rent), housePrice(housePrice),

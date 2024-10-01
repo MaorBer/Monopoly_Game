@@ -1,8 +1,7 @@
-#include "GameManager.hpp"
-#include "Dice.hpp"
+#include "../hppFiles/GameManager.hpp"
 
 void GameManager::playTurn(std::shared_ptr<Player> player) {
-    auto diceRoll = Dice::roll();
+    auto diceRoll = Player::rollDice();  
     std::cout << player->name << " rolled " << diceRoll.first << " and " << diceRoll.second << std::endl;
     int steps = diceRoll.first + diceRoll.second;
     board.movePlayer(player, steps);

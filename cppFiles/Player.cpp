@@ -1,5 +1,5 @@
-#include "../hpp files/Player.hpp"
-#include "../hpp files/Slot.hpp"
+#include "../hppFiles/Player.hpp"
+#include "../hppFiles/Slot.hpp"
 #include <iostream>
 #include <algorithm>
 
@@ -40,6 +40,10 @@ void Player::reduceMoney(int price) {
     else{
         exit(1);
     }
+}
+
+std::pair<int, int> Player::rollDice() {
+    return {1 + rand() % 6, 1 + rand() % 6};
 }
 
 

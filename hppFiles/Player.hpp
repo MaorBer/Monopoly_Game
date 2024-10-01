@@ -26,6 +26,7 @@ public:
     void reduceMoney(int price); 
     void addMoney(int amount);
     bool ownsBothUtilities() const;
+    static std::pair<int, int> rollDice();
 
     // Getters
     std::string getName() const;

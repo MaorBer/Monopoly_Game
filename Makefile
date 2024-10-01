@@ -54,7 +54,6 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		mainwindow.cpp \
-		cppFiles/Dice.cpp \
 		cppFiles/Gameboard.cpp \
 		cppFiles/GameManager.cpp \
 		cppFiles/Player.cpp \
@@ -65,7 +64,6 @@ SOURCES       = main.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		Dice.o \
 		Gameboard.o \
 		GameManager.o \
 		Player.o \
@@ -132,6 +130,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -152,7 +151,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		MonopolyGame.pro mainwindow.h \
-		hppFiles/Dice.hpp \
 		hppFiles/GameBoard.hpp \
 		hppFiles/GameManager.hpp \
 		hppFiles/Player.hpp \
@@ -161,7 +159,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		hppFiles/Street.hpp \
 		hppFiles/Train.hpp main.cpp \
 		mainwindow.cpp \
-		cppFiles/Dice.cpp \
 		cppFiles/Gameboard.cpp \
 		cppFiles/GameManager.cpp \
 		cppFiles/Player.cpp \
@@ -237,6 +234,7 @@ Makefile: MonopolyGame.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -316,6 +314,7 @@ Makefile: MonopolyGame.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -353,8 +352,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h hppFiles/Dice.hpp hppFiles/GameBoard.hpp hppFiles/GameManager.hpp hppFiles/Player.hpp hppFiles/Slot.hpp hppFiles/SpecialSlot.hpp hppFiles/Street.hpp hppFiles/Train.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/Dice.cpp cppFiles/Gameboard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h hppFiles/GameBoard.hpp hppFiles/GameManager.hpp hppFiles/Player.hpp hppFiles/Slot.hpp hppFiles/SpecialSlot.hpp hppFiles/Street.hpp hppFiles/Train.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/Gameboard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -430,9 +429,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
-Dice.o: cppFiles/Dice.cpp hppFiles/Dice.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Dice.o cppFiles/Dice.cpp
-
 Gameboard.o: cppFiles/Gameboard.cpp hppFiles/GameBoard.hpp \
 		hppFiles/Slot.hpp \
 		hppFiles/Player.hpp \
@@ -445,12 +441,11 @@ Gameboard.o: cppFiles/Gameboard.cpp hppFiles/GameBoard.hpp \
 GameManager.o: cppFiles/GameManager.cpp hppFiles/GameManager.hpp \
 		hppFiles/GameBoard.hpp \
 		hppFiles/Slot.hpp \
-		hppFiles/Player.hpp \
-		hppFiles/Dice.hpp
+		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o cppFiles/GameManager.cpp
 
-Player.o: cppFiles/Player.cpp hpp\ files/Player.hpp \
-		hpp\ files/Slot.hpp
+Player.o: cppFiles/Player.cpp hppFiles/Player.hpp \
+		hppFiles/Slot.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o cppFiles/Player.cpp
 
 Slot.o: cppFiles/Slot.cpp hppFiles/Slot.hpp
@@ -461,14 +456,14 @@ SpecialSlot.o: cppFiles/SpecialSlot.cpp hppFiles/SpecialSlot.hpp \
 		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SpecialSlot.o cppFiles/SpecialSlot.cpp
 
-Street.o: cppFiles/Street.cpp hpp\ files/Street.hpp \
-		hpp\ files/Slot.hpp \
-		hpp\ files/Player.hpp
+Street.o: cppFiles/Street.cpp hppFiles/Street.hpp \
+		hppFiles/Slot.hpp \
+		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Street.o cppFiles/Street.cpp
 
-Train.o: cppFiles/Train.cpp hpp\ files/Train.hpp \
-		hpp\ files/Slot.hpp \
-		hpp\ files/Player.hpp
+Train.o: cppFiles/Train.cpp hppFiles/Train.hpp \
+		hppFiles/Slot.hpp \
+		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Train.o cppFiles/Train.cpp
 
 qrc_resources.o: qrc_resources.cpp 

@@ -12,7 +12,6 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    cppFiles/Dice.cpp \
     cppFiles/GameBoard.cpp \
     cppFiles/GameManager.cpp \
     cppFiles/Player.cpp \
@@ -23,7 +22,6 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    hppFiles/Dice.hpp \
     hppFiles/GameBoard.hpp \
     hppFiles/GameManager.hpp \
     hppFiles/Player.hpp \
