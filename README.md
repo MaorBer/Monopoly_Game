@@ -4,6 +4,7 @@
 ## Overview
 
 This project is a C++ implementation of the classic board game Monopoly, designed to run on a console and utilize the Qt framework for a graphical user interface (GUI). It supports 2 to 8 players and includes functionalities such as rolling dice, buying properties, and handling player interactions.
+Final Project in System Programming 2 course in Ariel University.
 
 ## Features
 
@@ -116,7 +117,7 @@ This project is a C++ implementation of the classic board game Monopoly, designe
 
 1. **Clone the Repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/MaorBer/Monopoly_Game
    cd Monopoly_Game
    ```
 
@@ -137,15 +138,4 @@ This project is a C++ implementation of the classic board game Monopoly, designe
 4. **End Your Turn:** Click the "End Turn" button to pass the turn to the next player.
 5. **Game Over:** The game continues until only one player remains or a predefined condition is met.
 
-## Contributing
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or feature requests.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-## Acknowledgments
-
-- Special thanks to the creators of the original Monopoly game for the inspiration.
-- Thanks to the Qt community for providing an excellent framework for building applications.
