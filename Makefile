@@ -407,8 +407,20 @@ moc_mainwindow.cpp: mainwindow.h \
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
-compiler_moc_source_make_all:
+compiler_moc_source_make_all: mainwindow.moc
 compiler_moc_source_clean:
+	-$(DEL_FILE) mainwindow.moc
+mainwindow.moc: mainwindow.cpp \
+		mainwindow.h \
+		ui_mainwindow.h \
+		hppFiles/GameManager.hpp \
+		hppFiles/GameBoard.hpp \
+		hppFiles/Slot.hpp \
+		hppFiles/Player.hpp \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/maor/Desktop/CS/SP_2/Monopoly_Game/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/maor/Desktop/CS/SP_2/Monopoly_Game -I/home/maor/Desktop/CS/SP_2/Monopoly_Game/hppFiles -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.cpp -o mainwindow.moc
+
 compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
@@ -422,7 +434,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_moc_source_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -433,7 +445,11 @@ main.o: main.cpp hppFiles/GameManager.hpp \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		hppFiles/GameManager.hpp \
+		hppFiles/GameBoard.hpp \
+		hppFiles/Slot.hpp \
+		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 Gameboard.o: cppFiles/Gameboard.cpp hppFiles/GameBoard.hpp \

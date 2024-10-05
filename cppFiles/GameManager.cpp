@@ -1,35 +1,57 @@
 #include "../hppFiles/GameManager.hpp"
 #include <iostream>
+#include <cstdlib> // For rand() and srand()
+#include <ctime> // For time()
 
-GameManager::GameManager() : board() { // Initialize GameBoard
-    // Any additional initialization logic for the game can go here
+GameManager::GameManager() : board(), currentPlayerIndex(0) {
+    // Initialize random seed for dice rolls
+    std::srand(static_cast<unsigned int>(std::time(nullptr))); 
+}
+
+std::pair<int, int> GameManager::rollDice() {
+    int die1 = std::rand() % 6 + 1; // Generate a random number between 1 and 6
+    int die2 = std::rand() % 6 + 1; // Generate a random number between 1 and 6
+    return { die1, die2 }; // Return the rolled values
+}
+
+void GameManager::buyProperty(std::shared_ptr<Player> player, std::shared_ptr<Slot> property) {
+    if (property->owner) {
+        std::cout << "Property already owned!" << std::endl;
+        return;
+    }
+    
+    if (player->getMoney() < property->price) {
+        std::cout << "Not enough money to buy this property!" << std::endl;
+        return;
+    }
+    
+    player->buyProperty(property);
+    property->owner = player; // Set the player as the owner of the property
+    player->reduceMoney(property->price); // Deduct the cost from the player's money
+    std::cout << player->getName() << " bought " << property->name << " for " << property->price << std::endl;
 }
 
 void GameManager::playTurn(std::shared_ptr<Player> player) {
-    auto diceRoll = player->rollDice();  // Call rollDice on the player instance
+    auto diceRoll = rollDice(); // Roll the dice
     std::cout << player->getName() << " rolled " << diceRoll.first << " and " << diceRoll.second << std::endl;
     int steps = diceRoll.first + diceRoll.second;
-    board.movePlayer(player, steps); // Make sure movePlayer handles game logic
+    board.movePlayer(player, steps); // Move the player
+
+    // Get the slot the player landed on
+    auto landedSlot = board.getSlot(player->getPosition());
+    if (landedSlot) {
+        landedSlot->action(player); // Execute the slot action
+    }
 }
 
-void GameManager::addPlayer(const std::string& playerName) {
-    // Check if the player already exists
-    for (const auto& player : players) {
-        if (player->getName() == playerName) {
-            std::cout << "Player " << playerName << " already exists!" << std::endl;
-            return; // Prevent adding duplicate players
-        }
-    }
-    players.push_back(std::make_shared<Player>(playerName));
+void GameManager::endTurn() {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.size(); // Move to the next player
+    currentPlayer = players[currentPlayerIndex]; // Update the current player
 }
 
 void GameManager::startGame() {
     while (!isGameOver()) {
-        for (auto& player : players) {
-            if (!player->isBankrupt()) {
-                playTurn(player);
-            }
-        }
+        playTurn(currentPlayer); // Play turn for the current player
     }
 }
 
