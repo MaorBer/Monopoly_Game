@@ -60,7 +60,8 @@ SOURCES       = main.cpp \
 		cppFiles/Slot.cpp \
 		cppFiles/SpecialSlot.cpp \
 		cppFiles/Street.cpp \
-		cppFiles/Train.cpp qrc_resources.cpp \
+		cppFiles/Train.cpp \
+		cppFiles/Utility.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -71,6 +72,7 @@ OBJECTS       = main.o \
 		SpecialSlot.o \
 		Street.o \
 		Train.o \
+		Utility.o \
 		qrc_resources.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -157,7 +159,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		hppFiles/Slot.hpp \
 		hppFiles/SpecialSlot.hpp \
 		hppFiles/Street.hpp \
-		hppFiles/Train.hpp main.cpp \
+		hppFiles/Train.hpp \
+		hppFiles/Utility.hpp main.cpp \
 		mainwindow.cpp \
 		cppFiles/Gameboard.cpp \
 		cppFiles/GameManager.cpp \
@@ -165,7 +168,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		cppFiles/Slot.cpp \
 		cppFiles/SpecialSlot.cpp \
 		cppFiles/Street.cpp \
-		cppFiles/Train.cpp
+		cppFiles/Train.cpp \
+		cppFiles/Utility.cpp
 QMAKE_TARGET  = MonopolyGame
 DESTDIR       = 
 TARGET        = MonopolyGame
@@ -352,8 +356,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h hppFiles/GameBoard.hpp hppFiles/GameManager.hpp hppFiles/Player.hpp hppFiles/Slot.hpp hppFiles/SpecialSlot.hpp hppFiles/Street.hpp hppFiles/Train.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/Gameboard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h hppFiles/GameBoard.hpp hppFiles/GameManager.hpp hppFiles/Player.hpp hppFiles/Slot.hpp hppFiles/SpecialSlot.hpp hppFiles/Street.hpp hppFiles/Train.hpp hppFiles/Utility.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/Gameboard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp cppFiles/Utility.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -465,6 +469,11 @@ Train.o: cppFiles/Train.cpp hppFiles/Train.hpp \
 		hppFiles/Slot.hpp \
 		hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Train.o cppFiles/Train.cpp
+
+Utility.o: cppFiles/Utility.cpp hppFiles/Utility.hpp \
+		hppFiles/Slot.hpp \
+		hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Utility.o cppFiles/Utility.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

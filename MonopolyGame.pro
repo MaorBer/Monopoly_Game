@@ -18,7 +18,9 @@ SOURCES += \
     cppFiles/Slot.cpp \
     cppFiles/SpecialSlot.cpp \
     cppFiles/Street.cpp \
-    cppFiles/Train.cpp
+    cppFiles/Train.cpp \
+    cppFiles/Utility.cpp
+
 
 HEADERS += \
     mainwindow.h \
@@ -28,7 +30,8 @@ HEADERS += \
     hppFiles/Slot.hpp \
     hppFiles/SpecialSlot.hpp \
     hppFiles/Street.hpp \
-    hppFiles/Train.hpp
+    hppFiles/Train.hpp \
+    hppFiles/Utility.hpp
 
 
 FORMS += \

@@ -1,5 +1,6 @@
 #include "../hppFiles/Player.hpp"
 #include "../hppFiles/Slot.hpp"
+#include "../hppFiles/Utility.hpp"
 #include <iostream>
 #include <algorithm>
 
@@ -26,7 +27,22 @@ void Player::payRent(int amount) {
 }
 
 void Player::buildHouse(std::shared_ptr<Slot> street) {
-    // TODO: Add house-building logic
+    if (street->owner != shared_from_this()) {
+        std::cout << "You do not own this property." << std::endl;
+        return;
+    }
+
+    if (!street->canBuildHouse()) {
+        std::cout << "Cannot build more houses on " << street->name << "." << std::endl;
+        return;
+    }
+
+    if (money >= street->houseCost) {
+        money -= street->houseCost;
+        street->buildHouse();
+    } else {
+        std::cout << "Not enough money to build a house on " << street->name << "." << std::endl;
+    }
 }
 
 bool Player::isBankrupt() const {
@@ -36,16 +52,30 @@ bool Player::isBankrupt() const {
 void Player::reduceMoney(int price) {
     if (price > 0) {
         this->money -= price;
-    }
-    else{
+    } else {
         exit(1);
     }
+}
+
+void Player::addMoney(int amount) {
+    if (amount > 0) {
+        money += amount;
+    }
+}
+
+bool Player::ownsBothUtilities() const {
+    int utilityCount = 0;
+    for (const auto& property : properties) {
+        if (std::dynamic_pointer_cast<Utility>(property)) {
+            utilityCount++;
+        }
+    }
+    return utilityCount == 2;
 }
 
 std::pair<int, int> Player::rollDice() {
     return {1 + rand() % 6, 1 + rand() % 6};
 }
-
 
 // Getters
 std::string Player::getName() const {

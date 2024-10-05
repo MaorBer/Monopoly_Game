@@ -2,7 +2,7 @@
 #include "Player.hpp"  // Include the Player class
 
 Utility::Utility(const std::string& name, int price)
-    : Slot(name, price), name(name), price(price) {}
+    : Slot(name, price){}
 
 void Utility::action(std::shared_ptr<Player> player) {
     if (!owner) {

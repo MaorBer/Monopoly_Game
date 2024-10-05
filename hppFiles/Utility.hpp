@@ -4,12 +4,13 @@
 #include "Slot.hpp"
 #include <memory>
 #include <string>
-#include <iostream>  // For std::cout (if you're using it for output)
+#include <iostream> 
+#include "Player.hpp"
 
 class Utility : public Slot, public std::enable_shared_from_this<Utility> {
 public:
     Utility(const std::string& name, int price);
-    virtual void action(std::shared_ptr<Player> player) override;
+    void action(std::shared_ptr<Player> player) override;
 
     // Getters
     const std::string& getName() const { return name; }
@@ -18,6 +19,7 @@ public:
 private:
     std::string name;
     int price;
+    std::shared_ptr<Player> owner;
 };
 
 #endif // UTILITY_HPP
