@@ -54,7 +54,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		mainwindow.cpp \
-		cppFiles/GameBoard.cpp \
+		cppFiles/Gameboard.cpp \
 		cppFiles/GameManager.cpp \
 		cppFiles/Player.cpp \
 		cppFiles/Slot.cpp \
@@ -65,7 +65,7 @@ SOURCES       = main.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		GameBoard.o \
+		Gameboard.o \
 		GameManager.o \
 		Player.o \
 		Slot.o \
@@ -162,7 +162,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		hppFiles/Train.hpp \
 		hppFiles/Utility.hpp main.cpp \
 		mainwindow.cpp \
-		cppFiles/GameBoard.cpp \
+		cppFiles/Gameboard.cpp \
 		cppFiles/GameManager.cpp \
 		cppFiles/Player.cpp \
 		cppFiles/Slot.cpp \
@@ -357,7 +357,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.h hppFiles/GameBoard.hpp hppFiles/GameManager.hpp hppFiles/Player.hpp hppFiles/Slot.hpp hppFiles/SpecialSlot.hpp hppFiles/Street.hpp hppFiles/Train.hpp hppFiles/Utility.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/GameBoard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp cppFiles/Utility.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp cppFiles/Gameboard.cpp cppFiles/GameManager.cpp cppFiles/Player.cpp cppFiles/Slot.cpp cppFiles/SpecialSlot.cpp cppFiles/Street.cpp cppFiles/Train.cpp cppFiles/Utility.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -436,14 +436,14 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
-GameBoard.o: cppFiles/GameBoard.cpp hppFiles/GameBoard.hpp \
+Gameboard.o: cppFiles/Gameboard.cpp hppFiles/GameBoard.hpp \
 		hppFiles/Slot.hpp \
 		hppFiles/Player.hpp \
 		hppFiles/SpecialSlot.hpp \
 		hppFiles/Street.hpp \
 		hppFiles/Train.hpp \
 		hppFiles/Utility.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameBoard.o cppFiles/GameBoard.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Gameboard.o cppFiles/Gameboard.cpp
 
 GameManager.o: cppFiles/GameManager.cpp hppFiles/GameManager.hpp \
 		hppFiles/GameBoard.hpp \
