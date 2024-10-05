@@ -125,7 +125,7 @@ Final Project in System Programming 2 course in Ariel University.
 
 3. **Build the Project:** Click on the build button in Qt Creator or run the following command:
    ```bash
-   qmake && make
+   qmake MonopolyGame.pro && make
    ```
 
 4. **Run the Application:** After building, run the executable produced in the bin directory.
