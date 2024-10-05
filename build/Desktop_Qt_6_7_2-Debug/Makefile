@@ -53,10 +53,26 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../main.cpp \
-		../../mainwindow.cpp qrc_resources.cpp \
+		../../mainwindow.cpp \
+		../../cppFiles/Gameboard.cpp \
+		../../cppFiles/GameManager.cpp \
+		../../cppFiles/Player.cpp \
+		../../cppFiles/Slot.cpp \
+		../../cppFiles/SpecialSlot.cpp \
+		../../cppFiles/Street.cpp \
+		../../cppFiles/Train.cpp \
+		../../cppFiles/Utility.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		Gameboard.o \
+		GameManager.o \
+		Player.o \
+		Slot.o \
+		SpecialSlot.o \
+		Street.o \
+		Train.o \
+		Utility.o \
 		qrc_resources.o \
 		moc_mainwindow.o
 DIST          = /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -278,8 +294,24 @@ DIST          = /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/exceptions.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/yacc.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/lex.prf \
-		../../../../MonopolyGame.pro ../../mainwindow.h ../../main.cpp \
-		../../mainwindow.cpp
+		../../../../MonopolyGame.pro ../../mainwindow.h \
+		../../hppFiles/GameBoard.hpp \
+		../../hppFiles/GameManager.hpp \
+		../../hppFiles/Player.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/SpecialSlot.hpp \
+		../../hppFiles/Street.hpp \
+		../../hppFiles/Train.hpp \
+		../../hppFiles/Utility.hpp ../../main.cpp \
+		../../mainwindow.cpp \
+		../../cppFiles/Gameboard.cpp \
+		../../cppFiles/GameManager.cpp \
+		../../cppFiles/Player.cpp \
+		../../cppFiles/Slot.cpp \
+		../../cppFiles/SpecialSlot.cpp \
+		../../cppFiles/Street.cpp \
+		../../cppFiles/Train.cpp \
+		../../cppFiles/Utility.cpp
 QMAKE_TARGET  = MonopolyGame
 DESTDIR       = 
 TARGET        = MonopolyGame
@@ -756,8 +788,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../mainwindow.h ../../hppFiles/GameBoard.hpp ../../hppFiles/GameManager.hpp ../../hppFiles/Player.hpp ../../hppFiles/Slot.hpp ../../hppFiles/SpecialSlot.hpp ../../hppFiles/Street.hpp ../../hppFiles/Train.hpp ../../hppFiles/Utility.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp ../../cppFiles/Gameboard.cpp ../../cppFiles/GameManager.cpp ../../cppFiles/Player.cpp ../../cppFiles/Slot.cpp ../../cppFiles/SpecialSlot.cpp ../../cppFiles/Street.cpp ../../cppFiles/Train.cpp ../../cppFiles/Utility.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -1013,196 +1045,10 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-main.o: ../../main.cpp ../../mainwindow.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/QMainWindow \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qmainwindow.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qglobal.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtversionchecks.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtconfiginclude.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qconfig.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtcore-config.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtconfigmacros.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtcoreexports.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qassert.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtnoop.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtypes.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtversion.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qsysinfo.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qlogging.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qflags.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcompare_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qatomic.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qyieldcpu.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qconstructormacros.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qdarwinhelpers.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qexceptionhandling.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qforeach.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qttypetraits.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfunctionpointer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmalloc.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qminmax.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qnumeric.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qoverload.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qswap.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtresource.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qttranslation.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qversiontagging.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qtgui-config.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qtguiexports.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgetsexports.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qwidget.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qnamespace.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtmetamacros.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qobject.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstring.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qchar.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringview.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbytearray.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qrefcount.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qarraydata.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qpair.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qarraydatapointer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qarraydataops.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcontainertools_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qxptype_traits.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/q20functional.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/q20memory.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbytearrayview.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringfwd.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/q20type_traits.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringliteral.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringalgorithms.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qlatin1stringview.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qanystringview.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qutf8stringview.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringtokenizer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringconverter.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringconverter_base.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qlist.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qhashfunctions.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qiterator.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringlist.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qalgorithms.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcoreevent.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmetatype.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcompare.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcomparehelpers.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qdatastream.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qiodevicebase.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfloat16.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmath.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qiterable.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmetacontainer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcontainerinfo.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtaggedpointer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qscopeguard.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qobject_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qbindingstorage.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmargins.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/q23utility.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qaction.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qkeysequence.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qicon.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qsize.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpixmap.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qrect.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qpoint.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qcolor.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qrgb.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qrgba64.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qshareddata.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qimage.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpixelformat.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qtransform.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpolygon.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qregion.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qline.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qvariant.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qdebug.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtextstream.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmap.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qshareddata_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qset.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qhash.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpalette.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qbrush.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qfont.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qendian.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qfontmetrics.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qfontinfo.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qcursor.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qbitmap.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qevent.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qiodevice.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qurl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qeventpoint.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qvector2d.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qvectornd.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qpointingdevice.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qinputdevice.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qscreen.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QList \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QObject \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QRect \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QSize \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QSizeF \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/QTransform \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qnativeinterface.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qscreen_platform.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qguiapplication.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qdeadlinetimer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qelapsedtimer.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qeventloop.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfuture.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfutureinterface.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qmutex.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qtsan_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qresultstore.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qfuture_impl.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qthreadpool.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qthread.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qrunnable.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qexception.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qpromise.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qinputmethod.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qlocale.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qguiapplication_platform.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/QApplication \
-		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qapplication.h
+main.o: ../../main.cpp ../../hppFiles/GameManager.hpp \
+		../../hppFiles/GameBoard.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -1413,6 +1259,49 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/QWidget \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
+
+Gameboard.o: ../../cppFiles/Gameboard.cpp ../../hppFiles/GameBoard.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp \
+		../../hppFiles/SpecialSlot.hpp \
+		../../hppFiles/Street.hpp \
+		../../hppFiles/Train.hpp \
+		../../hppFiles/Utility.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Gameboard.o ../../cppFiles/Gameboard.cpp
+
+GameManager.o: ../../cppFiles/GameManager.cpp ../../hppFiles/GameManager.hpp \
+		../../hppFiles/GameBoard.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o ../../cppFiles/GameManager.cpp
+
+Player.o: ../../cppFiles/Player.cpp ../../hppFiles/Player.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Utility.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o ../../cppFiles/Player.cpp
+
+Slot.o: ../../cppFiles/Slot.cpp ../../hppFiles/Slot.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Slot.o ../../cppFiles/Slot.cpp
+
+SpecialSlot.o: ../../cppFiles/SpecialSlot.cpp ../../hppFiles/SpecialSlot.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SpecialSlot.o ../../cppFiles/SpecialSlot.cpp
+
+Street.o: ../../cppFiles/Street.cpp ../../hppFiles/Street.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Street.o ../../cppFiles/Street.cpp
+
+Train.o: ../../cppFiles/Train.cpp ../../hppFiles/Train.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Train.o ../../cppFiles/Train.cpp
+
+Utility.o: ../../cppFiles/Utility.cpp ../../hppFiles/Utility.hpp \
+		../../hppFiles/Slot.hpp \
+		../../hppFiles/Player.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Utility.o ../../cppFiles/Utility.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

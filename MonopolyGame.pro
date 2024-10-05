@@ -12,7 +12,7 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    cppFiles/GameBoard.cpp \
+    cppFiles/Gameboard.cpp \
     cppFiles/GameManager.cpp \
     cppFiles/Player.cpp \
     cppFiles/Slot.cpp \

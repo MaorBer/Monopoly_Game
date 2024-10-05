@@ -14,9 +14,10 @@ public:
     void addPlayer(const std::string& playerName);
     void startGame();
     bool isGameOver();
+    std::vector<std::shared_ptr<Player>> players;
 
 private:
-    std::vector<std::shared_ptr<Player>> players;
+    
     GameBoard board;
 };
 

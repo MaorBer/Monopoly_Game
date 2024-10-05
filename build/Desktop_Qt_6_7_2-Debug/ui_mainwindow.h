@@ -40,7 +40,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         label_Board = new QLabel(centralwidget);
         label_Board->setObjectName("label_Board");
-        label_Board->setGeometry(QRect(160, 20, 371, 381));
+        label_Board->setGeometry(QRect(210, 20, 371, 381));
         button_RollDice = new QPushButton(centralwidget);
         button_RollDice->setObjectName("button_RollDice");
         button_RollDice->setGeometry(QRect(40, 70, 100, 32));
