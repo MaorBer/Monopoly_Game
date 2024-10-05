@@ -8,7 +8,7 @@ Player::Player(const std::string& name, int money)
     : name(name), money(money), position(0), inJail(false), turnsInJail(0) {}
 
 void Player::move(int steps) {
-    position = (position + steps) % 40;
+    position = (position + steps) % 40; // Assuming 40 positions on the board
     std::cout << name << " moves to position " << position << std::endl;
 }
 
@@ -18,6 +18,8 @@ void Player::buyProperty(std::shared_ptr<Slot> property) {
         properties.push_back(property);
         property->owner = shared_from_this();
         std::cout << name << " bought " << property->name << std::endl;
+    } else {
+        std::cout << "Cannot buy " << property->name << std::endl;
     }
 }
 
@@ -40,6 +42,7 @@ void Player::buildHouse(std::shared_ptr<Slot> street) {
     if (money >= street->houseCost) {
         money -= street->houseCost;
         street->buildHouse();
+        std::cout << name << " built a house on " << street->name << "." << std::endl;
     } else {
         std::cout << "Not enough money to build a house on " << street->name << "." << std::endl;
     }
@@ -50,17 +53,11 @@ bool Player::isBankrupt() const {
 }
 
 void Player::reduceMoney(int price) {
-    if (price > 0) {
-        this->money -= price;
-    } else {
-        exit(1);
-    }
+    money -= price; // Assuming price is always positive
 }
 
 void Player::addMoney(int amount) {
-    if (amount > 0) {
-        money += amount;
-    }
+    money += amount;
 }
 
 bool Player::ownsBothUtilities() const {
@@ -74,7 +71,7 @@ bool Player::ownsBothUtilities() const {
 }
 
 std::pair<int, int> Player::rollDice() {
-    return {1 + rand() % 6, 1 + rand() % 6};
+    return {1 + rand() % 6, 1 + rand() % 6}; // Returns two dice rolls
 }
 
 // Getters

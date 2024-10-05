@@ -6,16 +6,18 @@
 #include "GameBoard.hpp"
 #include "Player.hpp"
 
-
 class GameManager {
 public:
-    std::vector<std::shared_ptr<Player>> players;
-    GameBoard board;
+    GameManager(); // Constructor to initialize GameBoard
 
     void playTurn(std::shared_ptr<Player> player);
     void addPlayer(const std::string& playerName);
     void startGame();
     bool isGameOver();
+
+private:
+    std::vector<std::shared_ptr<Player>> players;
+    GameBoard board;
 };
 
 #endif // GAMEMANAGER_HPP

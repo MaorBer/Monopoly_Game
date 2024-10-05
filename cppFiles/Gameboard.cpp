@@ -72,8 +72,9 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
 
 
 std::shared_ptr<Slot> GameBoard::getSlot(int index) {
-    if (index < 0 || index >= slots.size()) {
+    if (index < 0 || static_cast<size_t>(index) >= slots.size()) {
         throw std::out_of_range("Invalid slot index");
+        return nullptr;
     }
     return slots[index];
 }

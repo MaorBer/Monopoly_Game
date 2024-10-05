@@ -1,9 +1,15 @@
 #include "../hppFiles/Street.hpp"
 #include "../hppFiles/Player.hpp"
 
-Street::Street(const std::string& name, int price, const std::string& colorGroup, int rent, int housePrice, int rentWithHouse, int rentWithHotel)
-    : Slot(name, price), colorGroup(colorGroup), rent(rent), housePrice(housePrice),
-      rentWithHouse(rentWithHouse), rentWithHotel(rentWithHotel), houses(0), hasHotel(false) {}
+Street::Street(const std::string& name, int price, const std::string& colorGroup, 
+               int rent, int housePrice, int rentWithHouse, int rentWithHotel)
+    : Slot(name, price, housePrice), 
+      colorGroup(colorGroup), 
+      rent(rent), 
+      rentWithHouse(rentWithHouse), 
+      rentWithHotel(rentWithHotel), 
+      houses(0), 
+      hasHotel(false) {}
 
 void Street::buildHouse() {
     if (houses < 4 && !hasHotel) {

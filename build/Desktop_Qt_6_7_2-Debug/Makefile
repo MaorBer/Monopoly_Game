@@ -53,24 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../main.cpp \
-		../../mainwindow.cpp \
-		cppFiles/GameBoard.cpp \
-		../../cppFiles/GameManager.cpp \
-		../../cppFiles/Player.cpp \
-		../../cppFiles/Slot.cpp \
-		../../cppFiles/SpecialSlot.cpp \
-		../../cppFiles/Street.cpp \
-		../../cppFiles/Train.cpp qrc_resources.cpp \
+		../../mainwindow.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		GameBoard.o \
-		GameManager.o \
-		Player.o \
-		Slot.o \
-		SpecialSlot.o \
-		Street.o \
-		Train.o \
 		qrc_resources.o \
 		moc_mainwindow.o
 DIST          = /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -292,22 +278,8 @@ DIST          = /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/exceptions.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/yacc.prf \
 		/home/maor/Qt/6.7.2/gcc_64/mkspecs/features/lex.prf \
-		../../../../MonopolyGame.pro ../../mainwindow.h \
-		../../hppFiles/GameBoard.hpp \
-		../../hppFiles/GameManager.hpp \
-		../../hppFiles/Player.hpp \
-		../../hppFiles/Slot.hpp \
-		../../hppFiles/SpecialSlot.hpp \
-		../../hppFiles/Street.hpp \
-		../../hppFiles/Train.hpp ../../main.cpp \
-		../../mainwindow.cpp \
-		cppFiles/GameBoard.cpp \
-		../../cppFiles/GameManager.cpp \
-		../../cppFiles/Player.cpp \
-		../../cppFiles/Slot.cpp \
-		../../cppFiles/SpecialSlot.cpp \
-		../../cppFiles/Street.cpp \
-		../../cppFiles/Train.cpp
+		../../../../MonopolyGame.pro ../../mainwindow.h ../../main.cpp \
+		../../mainwindow.cpp
 QMAKE_TARGET  = MonopolyGame
 DESTDIR       = 
 TARGET        = MonopolyGame
@@ -784,8 +756,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/maor/Qt/6.7.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.h ../../hppFiles/GameBoard.hpp ../../hppFiles/GameManager.hpp ../../hppFiles/Player.hpp ../../hppFiles/Slot.hpp ../../hppFiles/SpecialSlot.hpp ../../hppFiles/Street.hpp ../../hppFiles/Train.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp cppFiles/GameBoard.cpp ../../cppFiles/GameManager.cpp ../../cppFiles/Player.cpp ../../cppFiles/Slot.cpp ../../cppFiles/SpecialSlot.cpp ../../cppFiles/Street.cpp ../../cppFiles/Train.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -1441,37 +1413,6 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/QWidget \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
-
-GameBoard.o: cppFiles/GameBoard.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameBoard.o cppFiles/GameBoard.cpp
-
-GameManager.o: ../../cppFiles/GameManager.cpp ../../hppFiles/GameManager.hpp \
-		../../hppFiles/GameBoard.hpp \
-		../../hppFiles/Slot.hpp \
-		../../hppFiles/Player.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o ../../cppFiles/GameManager.cpp
-
-Player.o: ../../cppFiles/Player.cpp ../../hppFiles/Player.hpp \
-		../../hppFiles/Slot.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o ../../cppFiles/Player.cpp
-
-Slot.o: ../../cppFiles/Slot.cpp ../../hppFiles/Slot.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Slot.o ../../cppFiles/Slot.cpp
-
-SpecialSlot.o: ../../cppFiles/SpecialSlot.cpp ../../hppFiles/SpecialSlot.hpp \
-		../../hppFiles/Slot.hpp \
-		../../hppFiles/Player.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SpecialSlot.o ../../cppFiles/SpecialSlot.cpp
-
-Street.o: ../../cppFiles/Street.cpp ../../hppFiles/Street.hpp \
-		../../hppFiles/Slot.hpp \
-		../../hppFiles/Player.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Street.o ../../cppFiles/Street.cpp
-
-Train.o: ../../cppFiles/Train.cpp ../../hppFiles/Train.hpp \
-		../../hppFiles/Slot.hpp \
-		../../hppFiles/Player.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Train.o ../../cppFiles/Train.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

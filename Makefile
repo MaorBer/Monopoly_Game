@@ -449,7 +449,8 @@ GameManager.o: cppFiles/GameManager.cpp hppFiles/GameManager.hpp \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o cppFiles/GameManager.cpp
 
 Player.o: cppFiles/Player.cpp hppFiles/Player.hpp \
-		hppFiles/Slot.hpp
+		hppFiles/Slot.hpp \
+		hppFiles/Utility.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Player.o cppFiles/Player.cpp
 
 Slot.o: cppFiles/Slot.cpp hppFiles/Slot.hpp
