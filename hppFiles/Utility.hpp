@@ -2,24 +2,19 @@
 #define UTILITY_HPP
 
 #include "Slot.hpp"
-#include <memory>
-#include <string>
-#include <iostream> 
-#include "Player.hpp"
 
+// Utility class represents the Electric Company and Water Works.
+// Rent is calculated differently based on dice rolls and whether the player owns both utilities.
 class Utility : public Slot, public std::enable_shared_from_this<Utility> {
 public:
-    Utility(const std::string& name, int price);
+    // Constructor initializes utility name, price, and position.
+    Utility(const std::string& name, int price, int position);
+
+    // Action for when a player lands on this utility.
     void action(std::shared_ptr<Player> player) override;
 
-    // Getters
-    const std::string& getName() const { return name; }
-    int getPrice() const { return price; }
-
-private:
-    std::string name;
-    int price;
-    std::shared_ptr<Player> owner;
+    // Calculate rent based on dice rolls and ownership of both utilities.
+    int calculateRent(int diceRoll, bool ownsBoth) const;
 };
 
 #endif // UTILITY_HPP

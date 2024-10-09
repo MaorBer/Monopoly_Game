@@ -1,31 +1,30 @@
 #include "Utility.hpp"
-#include "Player.hpp"  // Include the Player class
+#include "Player.hpp"
 
-Utility::Utility(const std::string& name, int price)
-    : Slot(name, price){}
+// Constructor initializes the utility's name, price, and board position.
+Utility::Utility(const std::string& name, int price, int position)
+    : Slot(name, price, position) {}
 
+// Calculates the rent based on the dice roll and whether the owner has both utilities.
+int Utility::calculateRent(int diceRoll, bool ownsBoth) const {
+    return diceRoll * (ownsBoth ? 10 : 4);  // 10x if both utilities are owned, 4x otherwise
+}
+
+// Action performed when a player lands on this utility slot.
 void Utility::action(std::shared_ptr<Player> player) {
-    if (!owner) {
-        if (player->getMoney() >= price) {
-            std::cout << player->getName() << " can buy " << name << " for " << price << " dollars." << std::endl;
-            player->reduceMoney(price);
-            owner = player;
-            std::cout << player->getName() << " bought " << name << "." << std::endl;
-        } else {
-            std::cout << player->getName() << " doesn't have enough money to buy " << name << "." << std::endl;
-        }
-    } else if (owner == player) {
-        std::cout << player->getName() << " owns this utility. No rent needed." << std::endl;
-    } else {
-        // Fix for the issue:
+    auto slotOwner = owner.lock();
+    if (slotOwner && slotOwner != player) {
+        // Owner exists and it's not the player landing here
         auto diceRoll = player->rollDice();
-        int diceSum = diceRoll.first + diceRoll.second; // Sum of the two dice rolls
-        int rentMultiplier = owner->ownsBothUtilities() ? 10 : 4;
-        int rent = diceSum * rentMultiplier;
+        int diceSum = diceRoll.first + diceRoll.second;  // Sum of the dice rolls
+        int rent = calculateRent(diceSum, slotOwner->ownsBothUtilities());
 
-        std::cout << player->getName() << " landed on " << name << " owned by " << owner->getName()
-                  << ". They must pay " << rent << " dollars." << std::endl;
-        player->reduceMoney(rent);
-        owner->addMoney(rent);
+        std::cout << player->name << " landed on " << name << " owned by " << slotOwner->name
+                  << ". They must pay $" << rent << " in rent." << std::endl;
+        player->payRent(rent);
+        slotOwner->addMoney(rent);
+    } else if (!slotOwner) {
+        std::cout << player->name << " landed on an unowned utility: " << name 
+                  << ". Would you like to buy it for $" << price << "?" << std::endl;
     }
 }

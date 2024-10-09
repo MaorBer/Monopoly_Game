@@ -1,24 +1,16 @@
 #include "Slot.hpp"
+#include "Player.hpp"
 
+// Slot constructor initializes the name, price, and position of the slot.
+Slot::Slot(const std::string& name, int price, int position)
+    : name(name), price(price), position(position) {}
 
-Slot::Slot(const std::string& name, int price)
-    : name(name), price(price), owner(nullptr), houses(0), houseCost(0) {
+// Checks if the slot has an owner.
+bool Slot::isOwned() const {
+    return !owner.expired();  // If the weak_ptr is expired, there is no owner.
 }
 
-Slot::Slot(const std::string& name, int price, int houseCost)
-    : name(name), price(price), owner(nullptr), houses(0), houseCost(houseCost) {
-}
-
-bool Slot::canBuildHouse() const {
-    // Check if the slot has an owner and if the maximum number of houses is not exceeded
-    return owner != nullptr && houses < 4; // Assuming 4 is the max number of houses
-}
-
-void Slot::buildHouse() {
-    if (canBuildHouse()) {
-        houses++;
-        std::cout << "House built on " << name << ". Total houses: " << houses << std::endl;
-    } else {
-        std::cout << "Cannot build house on " << name << "." << std::endl;
-    }
+// Displays slot information — basic implementation to be overridden by derived classes.
+void Slot::displayInfo() const {
+    std::cout << "Slot: " << name << ", Price: " << price << ", Position: " << position << std::endl;
 }

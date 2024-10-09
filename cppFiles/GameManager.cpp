@@ -1,64 +1,60 @@
-#include "../hppFiles/GameManager.hpp"
+#include "GameManager.hpp"
 #include <iostream>
-#include <cstdlib> // For rand() and srand()
-#include <ctime> // For time()
+#include <cstdlib>
+#include <ctime>
 
-GameManager::GameManager() : board(), currentPlayerIndex(0) {
-    // Initialize random seed for dice rolls
-    std::srand(static_cast<unsigned int>(std::time(nullptr))); 
+// Constructor initializes the game board and sets up an empty player list.
+GameManager::GameManager() : currentPlayerIndex(0) {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));  // Seed random number generator
+    board.initBoard();  // Initialize the game board with slots
 }
 
-std::pair<int, int> GameManager::rollDice() {
-    int die1 = std::rand() % 6 + 1; // Generate a random number between 1 and 6
-    int die2 = std::rand() % 6 + 1; // Generate a random number between 1 and 6
-    return { die1, die2 }; // Return the rolled values
+// Adds a new player by name.
+void GameManager::addPlayer(const std::string& playerName) {
+    players.push_back(std::make_shared<Player>(playerName));  // Create a new player
 }
 
-void GameManager::buyProperty(std::shared_ptr<Player> player, std::shared_ptr<Slot> property) {
-    if (property->owner) {
-        std::cout << "Property already owned!" << std::endl;
-        return;
-    }
-    
-    if (player->getMoney() < property->price) {
-        std::cout << "Not enough money to buy this property!" << std::endl;
-        return;
-    }
-    
-    player->buyProperty(property);
-    property->owner = player; // Set the player as the owner of the property
-    player->reduceMoney(property->price); // Deduct the cost from the player's money
-    std::cout << player->getName() << " bought " << property->name << " for " << property->price << std::endl;
-}
-
-void GameManager::playTurn(std::shared_ptr<Player> player) {
-    auto diceRoll = rollDice(); // Roll the dice
-    std::cout << player->getName() << " rolled " << diceRoll.first << " and " << diceRoll.second << std::endl;
-    int steps = diceRoll.first + diceRoll.second;
-    board.movePlayer(player, steps); // Move the player
-
-    // Get the slot the player landed on
-    auto landedSlot = board.getSlot(player->getPosition());
-    if (landedSlot) {
-        landedSlot->action(player); // Execute the slot action
-    }
-}
-
-void GameManager::endTurn() {
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.size(); // Move to the next player
-    currentPlayer = players[currentPlayerIndex]; // Update the current player
-}
-
+// Starts the main game loop, rotating through players until the game ends.
 void GameManager::startGame() {
     while (!isGameOver()) {
-        playTurn(currentPlayer); // Play turn for the current player
+        playTurn(players[currentPlayerIndex]);  // Play turn for the current player
+        endTurn();  // Move to the next player
     }
 }
 
+// Executes a single turn for the specified player.
+void GameManager::playTurn(std::shared_ptr<Player> player) {
+    auto diceRoll = rollDice();
+    std::cout << player->getName() << " rolled " << diceRoll.first << " and " << diceRoll.second << std::endl;
+    int steps = diceRoll.first + diceRoll.second;
+    board.movePlayer(player, steps);  // Move the player and trigger slot actions
+}
+
+// Ends the current player's turn and moves to the next player.
+void GameManager::endTurn() {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.size();  // Go to the next player
+    currentPlayer = players[currentPlayerIndex];
+}
+
+// Rolls two six-sided dice and returns the values.
+std::pair<int, int> GameManager::rollDice() {
+    return { std::rand() % 6 + 1, std::rand() % 6 + 1 };
+}
+
+// Handles property purchase for the current player.
+void GameManager::buyProperty(std::shared_ptr<Player> player, std::shared_ptr<Slot> property) {
+    if (property->isOwned()) {
+        std::cout << "This property is already owned!" << std::endl;
+        return;
+    }
+    player->buyProperty(property);
+}
+
+// Checks if the game is over (only one player left).
 bool GameManager::isGameOver() {
     int activePlayers = 0;
     for (const auto& player : players) {
         if (!player->isBankrupt()) activePlayers++;
     }
-    return activePlayers <= 1; // Game ends when one or no players are left
+    return activePlayers <= 1;
 }
