@@ -3,8 +3,9 @@
 
 #include <vector>
 #include <memory>
-#include "Slot.hpp"
-#include "Player.hpp"
+#include "../hppFiles/Slot.hpp"
+#include "../hppFiles/Player.hpp"
+
 
 class GameBoard {
 public:

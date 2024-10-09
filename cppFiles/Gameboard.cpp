@@ -68,7 +68,11 @@ void init_board(std::vector<std::shared_ptr<Slot>> &slots)
     slots.push_back(std::make_shared<Street>("Park Place", 350, "Blue", 35, 200, 175, 1500));
     slots.push_back(std::make_shared<SpecialSlot>("Luxury Tax", 100));
     slots.push_back(std::make_shared<Street>("Boardwalk", 400, "Blue", 50, 200, 200, 2000));
+
+    
 }
+
+    
 
 
 std::shared_ptr<Slot> GameBoard::getSlot(int index) {

@@ -1239,7 +1239,7 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/qlocale.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtGui/qguiapplication_platform.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../ui_mainwindow.h \
+		ui_mainwindow.h \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtCore/QVariant \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/QApplication \
 		/home/maor/Qt/6.7.2/gcc_64/include/QtWidgets/qapplication.h \

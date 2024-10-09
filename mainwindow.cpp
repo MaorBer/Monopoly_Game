@@ -3,10 +3,9 @@
 #include <QDebug>
 #include "hppFiles/GameManager.hpp"  // Include your GameManager header
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    gameManager(std::make_shared<GameManager>()), // Initialize the GameManager
+    gameManager(std::make_shared<GameManager>()),  // Correct the case here
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -27,14 +26,13 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
 void MainWindow::onRollDiceClicked() {
     qDebug() << "Roll Dice button clicked!";
-    auto [die1, die2] = gameManager->rollDice(); // Call your game manager's roll dice logic
+    auto [die1, die2] = gameManager->rollDice();  // Correct the case here
     qDebug() << "Rolled:" << die1 << "and" << die2;
 
     // You can also update the UI to display the rolled numbers if needed
@@ -50,27 +48,5 @@ void MainWindow::onBuyPropertyClicked() {
 void MainWindow::onEndTurnClicked() {
     qDebug() << "End Turn button clicked!";
     // Call your logic to end the turn and switch to the next player
-    gameManager->endTurn();
+    gameManager->endTurn();  // Correct the case here
 }
-
-
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-class MainWindow : public QMainWindow {
-    Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-private slots:
-    void onRollDiceClicked();
-    void onBuyPropertyClicked();
-    void onEndTurnClicked();
-
-private:
-    Ui::MainWindow *ui;
-    std::shared_ptr<GameManager> gameManager; // Add this line
-};

@@ -70,9 +70,9 @@ bool Player::ownsBothUtilities() const {
     return utilityCount == 2;
 }
 
-// std::pair<int, int> Player::rollDice() {
-//     return {1 + rand() % 6, 1 + rand() % 6}; // Returns two dice rolls
-// }
+std::pair<int, int> Player::rollDice() {
+    return {1 + rand() % 6, 1 + rand() % 6}; // Returns two dice rolls
+}
 
 // Getters
 std::string Player::getName() const {

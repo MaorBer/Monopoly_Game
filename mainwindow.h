@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory> // Include for std::shared_ptr
+#include "hppFiles/GameManager.hpp" // Include the GameManager header
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,5 +26,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    std::shared_ptr<GameManager> gameManager; // Member variable for GameManager
 };
+
 #endif // MAINWINDOW_H
