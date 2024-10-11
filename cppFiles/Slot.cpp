@@ -1,5 +1,5 @@
-#include "Slot.hpp"
-#include "Player.hpp"
+#include "../hppFiles/Slot.hpp"
+#include "../hppFiles/Player.hpp"
 
 // Slot constructor initializes the name, price, and position of the slot.
 Slot::Slot(const std::string& name, int price, int position)

@@ -1,5 +1,5 @@
-#include "Utility.hpp"
-#include "Player.hpp"
+#include "../hppFiles/Utility.hpp"
+#include "../hppFiles/Player.hpp"
 
 // Constructor initializes the utility's name, price, and board position.
 Utility::Utility(const std::string& name, int price, int position)

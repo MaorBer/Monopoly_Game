@@ -1,4 +1,4 @@
-#include "GameManager.hpp"
+#include "../hppFiles/GameManager.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -10,9 +10,14 @@ GameManager::GameManager() : currentPlayerIndex(0) {
 }
 
 // Adds a new player by name.
-void GameManager::addPlayer(const std::string& playerName) {
-    players.push_back(std::make_shared<Player>(playerName));  // Create a new player
+void GameManager::addPlayer(const std::string &playerName) {
+    auto newPlayer = std::make_shared<Player>(playerName);
+    players.push_back(newPlayer);  // Add the new player to the players list
+    if (players.size() == 1) {
+        currentPlayer = newPlayer;  // Set the first player as the current player
+    }
 }
+
 
 // Starts the main game loop, rotating through players until the game ends.
 void GameManager::startGame() {

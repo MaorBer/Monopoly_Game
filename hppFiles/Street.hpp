@@ -31,9 +31,6 @@ public:
     void displayInfo() const override;
 
     bool canBuildHouse() const;
-
-    // Build a house on this street.
-    void buildHouse();
 };
 
 #endif // STREET_HPP
