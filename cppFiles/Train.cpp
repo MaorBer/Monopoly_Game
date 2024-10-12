@@ -1,5 +1,5 @@
-#include "Train.hpp"
-#include "Player.hpp"
+#include "../hppFiles/Train.hpp"
+#include "../hppFiles/Player.hpp"
 
 // Train constructor initializes name, price, baseRent, and position.
 Train::Train(const std::string& name, int price, int baseRent, int position)

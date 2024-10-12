@@ -1,7 +1,7 @@
-#include "Player.hpp"
-#include "Slot.hpp"
-#include "Utility.hpp"
-#include "Street.hpp"
+#include "../hppFiles/Player.hpp"
+#include "../hppFiles/Slot.hpp"
+#include "../hppFiles/Utility.hpp"
+#include "../hppFiles/Street.hpp"
 #include <iostream>
 
 

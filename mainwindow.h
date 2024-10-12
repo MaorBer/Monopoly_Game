@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <memory> // Include for std::shared_ptr
-#include "hppFiles/GameManager.hpp" // Include the GameManager header
+#include "hppFiles/GameManager.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,17 +15,15 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-    void onRollDiceClicked();   // Slot for "Roll Dice" button
-    void onBuyPropertyClicked(); // Slot for "Buy Property" button
-    void onEndTurnClicked();    // Slot for "End Turn" button
 
 private:
     Ui::MainWindow *ui;
-    std::shared_ptr<GameManager> gameManager; // Member variable for GameManager
+    std::shared_ptr<GameManager> gameManager;
+
+private slots:
+    void onInitGameButtonClicked();  // Updated slot name for initializing the game
 };
 
 #endif // MAINWINDOW_H

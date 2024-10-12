@@ -1,52 +1,70 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
-#include "hppFiles/GameManager.hpp"  // Include your GameManager header
+#include "hppFiles/GameManager.hpp"
+#include <QLabel>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    gameManager(std::make_shared<GameManager>()),  // Correct the case here
-    ui(new Ui::MainWindow)
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+    , gameManager(std::make_shared<GameManager>())  // Initialize gameManager
 {
     ui->setupUi(this);
 
-    // Connect buttons to the slots
-    connect(ui->button_RollDice, &QPushButton::clicked, this, &MainWindow::onRollDiceClicked);
-    connect(ui->button_BuyProperty, &QPushButton::clicked, this, &MainWindow::onBuyPropertyClicked);
-    connect(ui->button_EndTurn, &QPushButton::clicked, this, &MainWindow::onEndTurnClicked);
+    // Check Init Game button
+    if (!ui->button_InitGame) {
+        qDebug() << "Error: button_InitGame is nullptr!";
+    } else {
+        qDebug() << "button_InitGame is correctly initialized.";
+    }
 
-    // Load Monopoly board as before
-    QPixmap boardPixmap(":/resources/Monopolyboardimg.jpg");
+    // Load Monopoly board image
+    QPixmap boardPixmap(":/Resources/MonopolyBoard.jpg");
 
     if (boardPixmap.isNull()) {
         qDebug() << "Image failed to load!";
     } else {
-        QPixmap scaledBoard = boardPixmap.scaled(ui->label_Board->size(), Qt::KeepAspectRatio);
-        ui->label_Board->setPixmap(scaledBoard);
+        // Set the Monopoly board image to the QLabel
+        ui->label_Board->setPixmap(boardPixmap.scaled(ui->label_Board->size(), Qt::KeepAspectRatio));
     }
+
+    // Connect the Init Game button to the new slot
+    connect(ui->button_InitGame, &QPushButton::clicked, this, &MainWindow::onInitGameButtonClicked);
+    qDebug() << "Connection made to onInitGameButtonClicked slot.";
 }
 
-MainWindow::~MainWindow() {
+MainWindow::~MainWindow()
+{
     delete ui;
 }
 
-void MainWindow::onRollDiceClicked() {
-    qDebug() << "Roll Dice button clicked!";
-    auto [die1, die2] = gameManager->rollDice();  // Correct the case here
-    qDebug() << "Rolled:" << die1 << "and" << die2;
+void MainWindow::onInitGameButtonClicked() {
+    qDebug() << "Init Game button clicked! Starting a new game.";
 
-    // You can also update the UI to display the rolled numbers if needed
+    // // Reset the game state by creating a new GameManager instance
+    // qDebug() << "Creating new GameManager...";
+    // gameManager = std::make_shared<GameManager>();
+    // if (!gameManager) {
+    //     qDebug() << "Error: GameManager is nullptr!";
+    //     return;  // Exit early if gameManager could not be created
+    // }
+
+    // qDebug() << "Adding Player 1...";
+    // gameManager->addPlayer("Player 1");
+
+    // qDebug() << "Adding Player 2...";
+    // gameManager->addPlayer("Player 2");
+
+    // qDebug() << "Adding Player 3...";
+    // gameManager->addPlayer("Player 3");
+
+    // qDebug() << "Adding Player 4...";
+    // gameManager->addPlayer("Player 4");
+
+    // qDebug() << "Initialized game with 4 players successfully.";
+
+    // // Update the UI to reflect the reset game state
+    // ui->button_InitGame->setText("Game Initialized!");
+    // qDebug() << "UI updated successfully.";
 }
 
-void MainWindow::onBuyPropertyClicked() {
-    qDebug() << "Buy Property button clicked!";
-    // Implement logic to buy property, assuming currentPlayer and selectedProperty are defined
-    // Example:
-    // gameManager->buyProperty(currentPlayer, selectedProperty);
-}
-
-void MainWindow::onEndTurnClicked() {
-    qDebug() << "End Turn button clicked!";
-    // Call your logic to end the turn and switch to the next player
-    gameManager->endTurn();  // Correct the case here
-}

@@ -1,5 +1,5 @@
-#include "SpecialSlot.hpp"
-#include "Player.hpp"
+#include "../hppFiles/SpecialSlot.hpp"
+#include "../hppFiles/Player.hpp"
 
 // Constructor for special slots without a specific action.
 SpecialSlot::SpecialSlot(const std::string& name, int position)

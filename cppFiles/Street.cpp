@@ -1,5 +1,5 @@
-#include "Street.hpp"
-#include "Player.hpp"
+#include "../hppFiles/Street.hpp"
+#include "../hppFiles/Player.hpp"
 
 // Street constructor initializes all relevant street properties, such as rent values and group color.
 Street::Street(const std::string& name, int price, const std::string& colorGroup, 
@@ -58,12 +58,12 @@ bool Street::canBuildHouse() const {
     return (houses < 4 && !hasHotel);  // Houses must be less than 4, and no hotel should exist
 }
 
-void Street::buildHouse() {
-    if (houses < 4) {
-        houses++;
-        std::cout << "Built house #" << houses << " on " << name << "." << std::endl;
-    } else if (!hasHotel) {
-        hasHotel = true;
-        std::cout << "Upgraded " << name << " to a hotel!" << std::endl;
-    }
-}
+// void Street::buildHouse() {
+//     if (houses < 4) {
+//         houses++;
+//         std::cout << "Built house #" << houses << " on " << name << "." << std::endl;
+//     } else if (!hasHotel) {
+//         hasHotel = true;
+//         std::cout << "Upgraded " << name << " to a hotel!" << std::endl;
+//     }
+// }
